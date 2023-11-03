@@ -74,6 +74,41 @@ namespace MJU23v_D10_inl_sveng
             string defaultFile = "..\\..\\..\\dict\\" + fileLoad + ".lis";
             return defaultFile;
         }
+        static void LoadFile(string defaultFile, string[] argument)
+        {
+            //FIXME, om fil ej finns
+            //FIXME, fil ej hittad, söker fil i fel directory
+            if (argument.Length == 2)
+            {
+                defaultFile = argument[1];
+                using (StreamReader sr = new StreamReader(defaultFile))
+                {
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+            else if (argument.Length == 1)
+            {
+                using (StreamReader sr = new StreamReader(defaultFile))
+                {
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = sr.ReadLine();
+                    }
+                }
+            }
+        }
+
         static void TranslateWordsMethod(string[] argument)
             {
                 if (argument.Length == 2)
@@ -112,43 +147,10 @@ namespace MJU23v_D10_inl_sveng
             Console.WriteLine("|                                                                                         |");
             Console.WriteLine(" -----------------------------------------------------------------------------------------");
         }
-
-        static void LoadFile(string defaultFile, string[] argument)
-        {
-            if (argument.Length == 2)
-            {
-                using (StreamReader sr = new StreamReader(argument[1]))
-                {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = sr.ReadLine();
-                    while (line != null)
-                    {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = sr.ReadLine();
-                    }
-                }
-            }
-            else if (argument.Length == 1)
-            {
-                using (StreamReader sr = new StreamReader(defaultFile))
-                {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = sr.ReadLine();
-                    while (line != null)
-                    {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = sr.ReadLine();
-                    }
-                }
-            }
-        }
-
         static void AddNewWord(string[] argument)
         {
             //TODO: Bekräfta för användaren vad som har tagits bort
-            //FIXME: Felstavning av delete crashar programmet, även den perfekta användaren kan råka göra fel 
+            //FIXME: Felstavning av översättnigarna crashar programmet, även den perfekta användaren kan råka göra fel 
             if (argument.Length == 3)
             {
                 dictionary.Add(new SweEngGloss(argument[1], argument[2]));
@@ -156,10 +158,10 @@ namespace MJU23v_D10_inl_sveng
             else if (argument.Length == 1)
             {
                 Console.WriteLine("Write word in Swedish: ");
-                string s = Console.ReadLine();
+                string SwedishWord = Console.ReadLine();
                 Console.Write("Write word in English: ");
-                string e = Console.ReadLine();
-                dictionary.Add(new SweEngGloss(s, e));
+                string EnglishWord = Console.ReadLine();
+                dictionary.Add(new SweEngGloss(SwedishWord, EnglishWord));
             }
         }
 
