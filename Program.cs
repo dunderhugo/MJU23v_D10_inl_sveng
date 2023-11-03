@@ -18,13 +18,18 @@ namespace MJU23v_D10_inl_sveng
                 this.word_swe = words[0]; this.word_eng = words[1];
             }
         }
+        static string ChooseFile()
+        {
+            Console.Write("Type what file you want to load: ");
+            string fileLoad = Console.ReadLine();
+            string defaultFile = "..\\..\\..\\dict\\" + fileLoad + ".lis";
+            return defaultFile;
+        }
         static void Main(string[] args)
         {
             //TODO: REFAKTORERA!
             Console.WriteLine("Welcome to the dictionary app! Type 'help' for commands.");
-            Console.Write("Type what file you want to load: ");
-            string fileLoad = Console.ReadLine();
-            string defaultFile = "..\\..\\..\\dict\\"+fileLoad+".lis";
+            string defaultFile = ChooseFile();
             do
             {
                 Console.Write("> ");
