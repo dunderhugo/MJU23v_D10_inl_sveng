@@ -21,8 +21,10 @@ namespace MJU23v_D10_inl_sveng
         static void Main(string[] args)
         {
             //TODO: REFAKTORERA!
-            string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app! Type 'help' for commands.");
+            Console.Write("Type what file you want to load: ");
+            string fileLoad = Console.ReadLine();
+            string defaultFile = "..\\..\\..\\dict\\"+fileLoad+".lis";
             do
             {
                 Console.Write("> ");
@@ -36,17 +38,7 @@ namespace MJU23v_D10_inl_sveng
                 }
                 else if (command == "help")
                 {
-                    Console.WriteLine(" -----------------------------------------------------------------------------------------");
-                    Console.WriteLine("|                                        COMMANDS                                         |");
-                    Console.WriteLine("|  * quit      |-   Quits the program                                                     |");
-                    Console.WriteLine("|  * help      |-   List of the commands                                                  |");
-                    Console.WriteLine("|  * load      |-   Loads the files with translated words                                 |");
-                    Console.WriteLine("|  * list      |-   Lists the swedish & English words in console                          |");
-                    Console.WriteLine("|  * new       |-   Adds new word to translate, make sure you spell right!!               |");
-                    Console.WriteLine("|  * delete    |-   Deletes word in list                                                  |");
-                    Console.WriteLine("|  * translate |-   Translates word from swedish to english, or from english to swedish   |");
-                    Console.WriteLine("|                                                                                         |");
-                    Console.WriteLine(" -----------------------------------------------------------------------------------------");
+                    HelpCommand();
                 }
                 else if (command == "load")
                 {
@@ -163,6 +155,21 @@ namespace MJU23v_D10_inl_sveng
                 }
             }
             while (true);
+
+            static void HelpCommand()
+            {
+                Console.WriteLine(" -----------------------------------------------------------------------------------------");
+                Console.WriteLine("|                                        COMMANDS                                         |");
+                Console.WriteLine("|  * quit      |-   Quits the program                                                     |");
+                Console.WriteLine("|  * help      |-   List of the commands                                                  |");
+                Console.WriteLine("|  * load      |-   Loads the files with translated words                                 |");
+                Console.WriteLine("|  * list      |-   Lists the swedish & English words in console                          |");
+                Console.WriteLine("|  * new       |-   Adds new word to translate, make sure you spell right!!               |");
+                Console.WriteLine("|  * delete    |-   Deletes word in list                                                  |");
+                Console.WriteLine("|  * translate |-   Translates word from swedish to english, or from english to swedish   |");
+                Console.WriteLine("|                                                                                         |");
+                Console.WriteLine(" -----------------------------------------------------------------------------------------");
+            }
         }
     }
 }
