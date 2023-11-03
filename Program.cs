@@ -22,7 +22,7 @@ namespace MJU23v_D10_inl_sveng
         {
             //TODO: REFAKTORERA!
             string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
-            Console.WriteLine("Welcome to the dictionary app!");
+            Console.WriteLine("Welcome to the dictionary app! Type 'help' for commands.");
             do
             {
                 Console.Write("> ");
@@ -36,8 +36,17 @@ namespace MJU23v_D10_inl_sveng
                 }
                 else if (command == "help")
                 {
-                    //NYI
-                    Console.WriteLine("NYI");
+                    Console.WriteLine(" -----------------------------------------------------------------------------------------");
+                    Console.WriteLine("|                                        COMMANDS                                         |");
+                    Console.WriteLine("|  * quit      |-   Quits the program                                                     |");
+                    Console.WriteLine("|  * help      |-   List of the commands                                                  |");
+                    Console.WriteLine("|  * load      |-   Loads the files with translated words                                 |");
+                    Console.WriteLine("|  * list      |-   Lists the swedish & English words in console                          |");
+                    Console.WriteLine("|  * new       |-   Adds new word to translate, make sure you spell right!!               |");
+                    Console.WriteLine("|  * delete    |-   Deletes word in list                                                  |");
+                    Console.WriteLine("|  * translate |-   Translates word from swedish to english, or from english to swedish   |");
+                    Console.WriteLine("|                                                                                         |");
+                    Console.WriteLine(" -----------------------------------------------------------------------------------------");
                 }
                 else if (command == "load")
                 {
@@ -122,6 +131,7 @@ namespace MJU23v_D10_inl_sveng
                         dictionary.RemoveAt(index);
                     }
                 }
+                //TODO: fixa så att man inte kan skriva commandot utan att ha laddat in filen
                 else if (command == "translate")
                 {
                     if (argument.Length == 2)
