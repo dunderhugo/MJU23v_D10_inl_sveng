@@ -25,9 +25,11 @@ namespace MJU23v_D10_inl_sveng
             string defaultFile = "..\\..\\..\\dict\\" + fileLoad + ".lis";
             return defaultFile;
         }
+
         static void Main(string[] args)
         {
             //TODO: REFAKTORERA!
+            
             Console.WriteLine("Welcome to the dictionary app! Type 'help' for commands.");
             string defaultFile = ChooseFile();
             do
@@ -47,34 +49,7 @@ namespace MJU23v_D10_inl_sveng
                 }
                 else if (command == "load")
                 {
-                    if(argument.Length == 2)
-                    {
-                        using (StreamReader sr = new StreamReader(argument[1]))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
-                    else if(argument.Length == 1)
-                    {
-                        using (StreamReader sr = new StreamReader(defaultFile))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
-                        }
-                    }
+                    LoadFile(defaultFile, argument);
                 }
                 else if (command == "list")
                 {
@@ -161,6 +136,7 @@ namespace MJU23v_D10_inl_sveng
             }
             while (true);
 
+
             static void HelpCommand()
             {
                 Console.WriteLine(" -----------------------------------------------------------------------------------------");
@@ -174,6 +150,38 @@ namespace MJU23v_D10_inl_sveng
                 Console.WriteLine("|  * translate |-   Translates word from swedish to english, or from english to swedish   |");
                 Console.WriteLine("|                                                                                         |");
                 Console.WriteLine(" -----------------------------------------------------------------------------------------");
+            }
+
+            static void LoadFile(string defaultFile, string[] argument)
+            {
+                if (argument.Length == 2)
+                {
+                    using (StreamReader sr = new StreamReader(argument[1]))
+                    {
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = sr.ReadLine();
+                        }
+                    }
+                }
+                else if (argument.Length == 1)
+                {
+                    using (StreamReader sr = new StreamReader(defaultFile))
+                    {
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = sr.ReadLine();
+                        }
+                    }
+                }
             }
         }
     }
