@@ -1,4 +1,6 @@
-﻿namespace MJU23v_D10_inl_sveng
+﻿using System.Data;
+
+namespace MJU23v_D10_inl_sveng
 {
     internal class Program
     {
@@ -26,10 +28,11 @@
                 Console.Write("> ");
                 string[] argument = Console.ReadLine().Split();
                 string command = argument[0];
-                //FIXME
+                //FIXME? annan funktion än break
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
+                    break;
                 }
                 else if (command == "help")
                 {
