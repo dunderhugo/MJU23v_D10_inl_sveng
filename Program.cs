@@ -18,6 +18,7 @@
         }
         static void Main(string[] args)
         {
+            //TODO: REFAKTORERA!
             string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
             do
@@ -25,9 +26,15 @@
                 Console.Write("> ");
                 string[] argument = Console.ReadLine().Split();
                 string command = argument[0];
+                //FIXME
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
+                }
+                else if (command == "help")
+                {
+                    //NYI
+                    Console.WriteLine("NYI");
                 }
                 else if (command == "load")
                 {
@@ -82,6 +89,8 @@
                         dictionary.Add(new SweEngGloss(s, e));
                     }
                 }
+                //TODO: Bekräfta för användaren vad som har tagits bort
+                //FIXME: Felstavning av delete crashar programmet, även den perfekta användaren kan råka göra fel 
                 else if (command == "delete")
                 {
                     if (argument.Length == 3)
