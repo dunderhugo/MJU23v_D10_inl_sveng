@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Channels;
 
 namespace MJU23v_D10_inl_sveng
 {
@@ -24,6 +25,7 @@ namespace MJU23v_D10_inl_sveng
             string DefaultFile = ChooseFile();
             do
             {
+                //FIXME: command is wrong if entered in uppercase
                 Console.Write("> ");
                 string[] argument = Console.ReadLine().Split();
                 string command = argument[0];
@@ -124,12 +126,14 @@ namespace MJU23v_D10_inl_sveng
             }
         static void TranslateWord(string WordToTranslate)
         {
+            //FIXME: Word not found Console.WriteLine writes each time for everyword in file. Not just once if word not found.
             foreach (SweEngGloss gloss in dictionary)
             {
                 if (gloss.word_swe == WordToTranslate)
                     Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
                 if (gloss.word_eng == WordToTranslate)
                     Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                else Console.WriteLine(WordToTranslate + " could not be found in this dictonary, try another word");
             }
         }
         static void HelpCommand()
@@ -148,8 +152,7 @@ namespace MJU23v_D10_inl_sveng
         }
         static void AddNewWord(string[] argument)
         {
-            //TODO: Bekräfta för användaren vad som har tagits bort
-            //FIXME: Felstavning av översättnigarna crashar programmet, även den perfekta användaren kan råka göra fel 
+            //FIXME: You can input different characters, not only letters, for example: ¤%&/()=
             if (argument.Length == 3)
             {
                 dictionary.Add(new SweEngGloss(argument[1], argument[2]));
@@ -166,6 +169,8 @@ namespace MJU23v_D10_inl_sveng
 
         static void DeleteTranslatedWord(string[] argument)
         {
+            //TODO: Bekräfta för användaren vad som har tagits bort
+            //FIXME: Felstavning av översättnigarna crashar programmet, även den perfekta användaren kan råka göra fel 
             if (argument.Length == 3)
             {
                 int index = -1;
@@ -195,6 +200,7 @@ namespace MJU23v_D10_inl_sveng
         }
         static void ListWords()
         {
+            //FIXME: if loaded command is not executed, the list command crashes program
             foreach (SweEngGloss gloss in dictionary)
             {
                 Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
