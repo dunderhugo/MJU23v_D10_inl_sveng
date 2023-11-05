@@ -25,7 +25,6 @@ namespace MJU23v_D10_inl_sveng
             string DefaultFile = ChooseFile();
             do
             {
-                //FIXME: command is wrong if entered in uppercase
                 Console.Write("> ");
                 string[] argument = Console.ReadLine().ToLower().Split();
                 string command = argument[0];
@@ -34,42 +33,18 @@ namespace MJU23v_D10_inl_sveng
                     Console.WriteLine("Goodbye!");
                     break;
                 }
-                else if (command == "help")
-                {
-                    HelpCommand();
-                }
-                else if (command == "load")
-                {
-                    FileToLoad(DefaultFile, argument);
-                }
-                else if (command == "list")
-                {
-                    ListWords();
-                }
-                else if (command == "new")
-                {
-                    AddNewWord(argument);
-                }
-                else if (command == "delete")
-                {
-                    DeleteTranslatedWord(argument);
-                }
-                else if (command == "translate")
-                {
-                    TranslateWordsMethod(argument);
-                }
-                else
-                {
-                    Console.WriteLine($"Unknown command: '{command}'");
-                }
+                else if (command == "help") HelpCommand();
+                else if (command == "load") FileToLoad(DefaultFile, argument);
+                else if (command == "list") ListWords();
+                else if (command == "new") AddNewWord(argument);
+                else if (command == "delete") DeleteTranslatedWord(argument);
+                else if (command == "translate") TranslateWordsMethod(argument);
+                else Console.WriteLine($"Unknown command: '{command}'");
             }
             while (true);
-
-
         }
-
-
         static string ChooseFile()
+            //TODO, do so that you dont need to use the "load" command before you use "list"
         {
             Console.Write("Type what file you want to load: ");
             string fileLoad = Console.ReadLine();
@@ -79,6 +54,7 @@ namespace MJU23v_D10_inl_sveng
         static void FileToLoad(string DefaultFile, string[] argument)
         {
             //FIXME, om fil ej finns
+            //TODO, refactor method, duplicatged code
             if (argument.Length == 2)
             {
                 DefaultFile = argument[1];
@@ -109,21 +85,20 @@ namespace MJU23v_D10_inl_sveng
                 }
             }
         }
-
         static void TranslateWordsMethod(string[] argument)
+        {
+            if (argument.Length == 2)
             {
-                if (argument.Length == 2)
-                {
-                    string WordToTranslate = argument[1];
-                    TranslateWord(WordToTranslate);
-                }
-                else if (argument.Length == 1)
-                {
-                    Console.WriteLine("Write word to be translated: ");
-                    string WordToTranslate = Console.ReadLine();
-                    TranslateWord(WordToTranslate);
-                }
+                string WordToTranslate = argument[1];
+                TranslateWord(WordToTranslate);
             }
+            else if (argument.Length == 1)
+            {
+                Console.WriteLine("Write word to be translated: ");
+                string WordToTranslate = Console.ReadLine();
+                TranslateWord(WordToTranslate);
+            }
+        }
         static void TranslateWord(string WordToTranslate)
         {
             //FIXME: Word not found Console.WriteLine writes each time for everyword in file. Not just once if word not found.
@@ -170,6 +145,7 @@ namespace MJU23v_D10_inl_sveng
         static void DeleteTranslatedWord(string[] argument)
         {
             //TODO: Bekräfta för användaren vad som har tagits bort
+            //TODO: Duplicatged code, refactor
             //FIXME: Felstavning av översättnigarna crashar programmet, även den perfekta användaren kan råka göra fel 
             if (argument.Length == 3)
             {
