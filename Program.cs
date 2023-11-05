@@ -21,7 +21,7 @@ namespace MJU23v_D10_inl_sveng
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the dictionary app! Type 'help' for commands.");
-            string defaultFile = ChooseFile();
+            string DefaultFile = ChooseFile();
             do
             {
                 Console.Write("> ");
@@ -38,7 +38,7 @@ namespace MJU23v_D10_inl_sveng
                 }
                 else if (command == "load")
                 {
-                    LoadFile(defaultFile, argument);
+                    FileToLoad(DefaultFile, argument);
                 }
                 else if (command == "list")
                 {
@@ -71,17 +71,16 @@ namespace MJU23v_D10_inl_sveng
         {
             Console.Write("Type what file you want to load: ");
             string fileLoad = Console.ReadLine();
-            string defaultFile = "..\\..\\..\\dict\\" + fileLoad + ".lis";
-            return defaultFile;
+            string DefaultFile = "..\\..\\..\\dict\\" + fileLoad + ".lis";
+            return DefaultFile;
         }
-        static void LoadFile(string defaultFile, string[] argument)
+        static void FileToLoad(string DefaultFile, string[] argument)
         {
             //FIXME, om fil ej finns
-            //FIXME, fil ej hittad, söker fil i fel directory
             if (argument.Length == 2)
             {
-                defaultFile = argument[1];
-                using (StreamReader sr = new StreamReader(defaultFile))
+                DefaultFile = argument[1];
+                using (StreamReader sr = new StreamReader("..\\..\\..\\dict\\"+DefaultFile+".lis"))
                 {
                     dictionary = new List<SweEngGloss>(); // Empty it!
                     string line = sr.ReadLine();
@@ -95,7 +94,7 @@ namespace MJU23v_D10_inl_sveng
             }
             else if (argument.Length == 1)
             {
-                using (StreamReader sr = new StreamReader(defaultFile))
+                using (StreamReader sr = new StreamReader(DefaultFile))
                 {
                     dictionary = new List<SweEngGloss>(); // Empty it!
                     string line = sr.ReadLine();
