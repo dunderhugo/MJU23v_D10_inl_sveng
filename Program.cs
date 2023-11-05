@@ -102,14 +102,22 @@ namespace MJU23v_D10_inl_sveng
         static void TranslateWord(string WordToTranslate)
         {
             //FIXME: Word not found Console.WriteLine writes each time for everyword in file. Not just once if word not found.
+            bool found = false;
             foreach (SweEngGloss gloss in dictionary)
             {
                 if (gloss.word_swe == WordToTranslate)
+                {
                     Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                    found = true;
+                }
                 if (gloss.word_eng == WordToTranslate)
+                {
                     Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                else Console.WriteLine(WordToTranslate + " could not be found in this dictonary, try another word");
+                    found = true;
+                }
             }
+            if (!found)
+                Console.WriteLine(WordToTranslate + " could not be found in this dictonary, try another word");
         }
         static void HelpCommand()
         {
