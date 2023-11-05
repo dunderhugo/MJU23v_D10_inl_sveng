@@ -27,7 +27,7 @@ namespace MJU23v_D10_inl_sveng
             {
                 //FIXME: command is wrong if entered in uppercase
                 Console.Write("> ");
-                string[] argument = Console.ReadLine().Split();
+                string[] argument = Console.ReadLine().ToLower().Split();
                 string command = argument[0];
                 if (command == "quit")
                 {
