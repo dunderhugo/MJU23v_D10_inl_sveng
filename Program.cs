@@ -55,34 +55,41 @@ namespace MJU23v_D10_inl_sveng
         {
             //FIXME, om fil ej finns
             //TODO, refactor method, duplicatged code
-            if (argument.Length == 2)
+            try
             {
-                DefaultFile = argument[1];
-                using (StreamReader sr = new StreamReader("..\\..\\..\\dict\\"+DefaultFile+".lis"))
+                if (argument.Length == 2)
                 {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = sr.ReadLine();
-                    while (line != null)
+                    DefaultFile = argument[1];
+                    using (StreamReader sr = new StreamReader("..\\..\\..\\dict\\" + DefaultFile + ".lis"))
                     {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = sr.ReadLine();
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = sr.ReadLine();
+                        }
+                    }
+                }
+                else if (argument.Length == 1)
+                {
+                    using (StreamReader sr = new StreamReader(DefaultFile))
+                    {
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = sr.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = sr.ReadLine();
+                        }
                     }
                 }
             }
-            else if (argument.Length == 1)
+            catch (FileNotFoundException)
             {
-                using (StreamReader sr = new StreamReader(DefaultFile))
-                {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = sr.ReadLine();
-                    while (line != null)
-                    {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = sr.ReadLine();
-                    }
-                }
+                Console.WriteLine("File not found, try another filename!");
             }
         }
         static void TranslateWordsMethod(string[] argument)
