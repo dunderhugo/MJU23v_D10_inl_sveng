@@ -101,7 +101,6 @@ namespace MJU23v_D10_inl_sveng
         }
         static void TranslateWord(string WordToTranslate)
         {
-            //FIXME: Word not found Console.WriteLine writes each time for everyword in file. Not just once if word not found.
             bool found = false;
             foreach (SweEngGloss gloss in dictionary)
             {
@@ -117,7 +116,7 @@ namespace MJU23v_D10_inl_sveng
                 }
             }
             if (!found)
-                Console.WriteLine(WordToTranslate + " could not be found in this dictonary, try another word");
+            Console.WriteLine(WordToTranslate + " could not be found in this dictonary, try another word");
         }
         static void HelpCommand()
         {
@@ -184,11 +183,19 @@ namespace MJU23v_D10_inl_sveng
         }
         static void ListWords()
         {
-            //FIXME: if loaded command is not executed, the list command crashes program
-            foreach (SweEngGloss gloss in dictionary)
+            try
             {
-                Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                }
             }
+            catch (Exception)
+            {
+                Console.WriteLine("No file is loaded. Type 'load' on command line\n" +
+                    "before you use 'list' command!");
+            }
+
         }
     }
 }
